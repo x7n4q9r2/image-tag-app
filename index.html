@@ -19,13 +19,16 @@
 
 <button id="fab">＋</button>
 
-<dialog id="uploadDialog">
-<h3>画像登録</h3>
-<input type="file" id="imageInput" accept="image/*"><br><br>
-<input type="text" id="tagInput" placeholder="タグをスペース区切りで入力">
-<div class="tagHints" id="tagHints"></div>
+<dialog id="detailDialog">
+<img id="detailImg">
+<p id="createdAt"></p>
+<div id="tagView"></div>
+<textarea id="editTags" style="display:none;"></textarea>
+
 <div class="actions">
-<button id="closeUpload">閉じる</button>
+<button id="editBtn">タグ編集</button>
+<button id="deleteBtn">削除</button>
+<button id="closeDetail">閉じる</button>
 </div>
 </dialog>
 
