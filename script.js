@@ -42,11 +42,7 @@ function compressImage(file,max=1800,quality=.85){
 $("saveBtn").onclick=async()=>{
  const file=$("imageInput").files[0];
  if(!file)return alert("ç»åãé¸æãã¦ãã ãã");
- const reader = new FileReader();
-reader.onload = () => {
-  // 保存処理
-};
-reader.readAsDataURL(file);
+ const data=await compressImage(file);
  const tags=$("tagInput").value.trim().split(/\s+/).filter(Boolean);
 
  const tx=db.transaction('images','readwrite');
@@ -97,14 +93,8 @@ async function updateTagHints(){
 function openDetail(item){
  $("detailImg").src=item.data;
  $("createdAt").textContent=new Date(item.createdAt).toLocaleString();
- $("tagView").textContent =
-  item.tags.map(tag => "#" + tag).join(" ");
- $("editTags").value =
-  item.tags.join(" ");
- $("editTags").style.display = "none";
- $("updateBtn").style.display = "none";
-
-$("detailDialog").showModal();
+ $("editTags").value=item.tags.join(" ");
+ $("detailDialog").showModal();
 
  $("updateBtn").onclick=()=>{
   const tx=db.transaction('images','readwrite');
@@ -113,9 +103,6 @@ $("detailDialog").showModal();
    tags:$("editTags").value.trim().split(/\s+/).filter(Boolean)
   });
   tx.oncomplete=()=>{$("detailDialog").close();render();};
-  $("tagView").style.display = "block";
-  $("editTags").style.display = "none";
-  $("updateBtn").style.display = "none";
  };
 
  $("deleteBtn").onclick=()=>{
@@ -130,11 +117,5 @@ $("detailDialog").showModal();
   a.href=item.data;
   a.download='image.jpg';
   a.click();
- };
-
- $("editBtn").onclick = () => {
-  $("tagView").style.display = "none";
-  $("editTags").style.display = "block";
-  $("updateBtn").style.display = "inline-block";
  };
 }
