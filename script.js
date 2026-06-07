@@ -97,8 +97,16 @@ async function updateTagHints(){
 function openDetail(item){
  $("detailImg").src=item.data;
  $("createdAt").textContent=new Date(item.createdAt).toLocaleString();
- $("editTags").value=item.tags.join(" ");
- $("detailDialog").showModal();
+ $("tagView").textContent =
+  item.tags.map(tag => "#" + tag).join(" ");
+
+$("editTags").value =
+  item.tags.join(" ");
+
+$("editTags").style.display = "none";
+$("updateBtn").style.display = "none";
+
+$("detailDialog").showModal();
 
  $("updateBtn").onclick=()=>{
   const tx=db.transaction('images','readwrite');
@@ -108,6 +116,9 @@ function openDetail(item){
   });
   tx.oncomplete=()=>{$("detailDialog").close();render();};
  };
+$("tagView").style.display = "block";
+$("editTags").style.display = "none";
+$("updateBtn").style.display = "none";
 
  $("deleteBtn").onclick=()=>{
   if(!confirm("削除しますか？")) return;
@@ -116,10 +127,9 @@ function openDetail(item){
   tx.oncomplete=()=>{$("detailDialog").close();render();};
  };
 
- $("downloadBtn").onclick=()=>{
-  const a=document.createElement('a');
-  a.href=item.data;
-  a.download='image.jpg';
-  a.click();
- };
+ $("editBtn").onclick = () => {
+  $("tagView").style.display = "none";
+  $("editTags").style.display = "block";
+  $("updateBtn").style.display = "inline-block";
+};
 }
