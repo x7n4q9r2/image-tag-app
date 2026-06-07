@@ -42,7 +42,11 @@ function compressImage(file,max=1800,quality=.85){
 $("saveBtn").onclick=async()=>{
  const file=$("imageInput").files[0];
  if(!file)return alert("画像を選択してください");
- const data=await compressImage(file);
+ const reader = new FileReader();
+reader.onload = () => {
+  // 保存処理
+};
+reader.readAsDataURL(file);
  const tags=$("tagInput").value.trim().split(/\s+/).filter(Boolean);
 
  const tx=db.transaction('images','readwrite');
