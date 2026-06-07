@@ -9,7 +9,7 @@
 <body>
 <header>
 <h2>画像タグ管理</h2>
-<input id="search" placeholder="タグ検索">
+<input id="search" placeholder="タグ検索（例: ヒョンジン 金髪）">
 </header>
 
 <main>
@@ -19,21 +19,29 @@
 
 <button id="fab">＋</button>
 
+<dialog id="uploadDialog">
+<h3>画像登録</h3>
+<input type="file" id="imageInput" accept="image/*"><br><br>
+<input type="text" id="tagInput" placeholder="タグをスペース区切りで入力">
+<div class="tagHints" id="tagHints"></div>
+<div class="actions">
+<button id="saveBtn">保存</button>
+<button id="closeUpload">閉じる</button>
+</div>
+</dialog>
+
 <dialog id="detailDialog">
-  <img id="detailImg">
+<img id="detailImg">
+<p id="createdAt"></p>
+<div id="tagView"></div>
 
-  <p id="createdAt"></p>
-
-  <div id="tagView"></div>
-
-  <textarea id="editTags" style="display:none;"></textarea>
-
-  <div class="actions">
-    <button id="editBtn">タグ編集</button>
-    <button id="updateBtn" style="display:none;">保存</button>
-    <button id="deleteBtn">削除</button>
-    <button id="closeDetail">閉じる</button>
-  </div>
+<textarea id="editTags" style="display:none;"></textarea>
+<div class="actions">
+<button id="editBtn">タグ編集</button>
+<button id="updateBtn" style="display:none;">保存</button>
+<button id="deleteBtn">削除</button>
+<button id="closeDetail">閉じる</button>
+</div>
 </dialog>
 
 <script src="script.js"></script>
