@@ -41,7 +41,7 @@ function compressImage(file,max=1800,quality=.85){
 
 $("saveBtn").onclick=async()=>{
  const file=$("imageInput").files[0];
- if(!file)return alert("画像を選択してください");
+ if(!file)return alert("ç»åãé¸æãã¦ãã ãã");
  const reader = new FileReader();
 reader.onload = () => {
   // 保存処理
@@ -71,7 +71,7 @@ async function render(){
   items=items.filter(i=>q.every(t=>i.tags.includes(t)));
  }
 
- $("stats").textContent=`${items.length}件`;
+ $("stats").textContent=`${items.length}ä»¶`;
 
  const gallery=$("gallery");
  gallery.innerHTML='';
@@ -99,12 +99,10 @@ function openDetail(item){
  $("createdAt").textContent=new Date(item.createdAt).toLocaleString();
  $("tagView").textContent =
   item.tags.map(tag => "#" + tag).join(" ");
-
-$("editTags").value =
+ $("editTags").value =
   item.tags.join(" ");
-
-$("editTags").style.display = "none";
-$("updateBtn").style.display = "none";
+ $("editTags").style.display = "none";
+ $("updateBtn").style.display = "none";
 
 $("detailDialog").showModal();
 
@@ -115,21 +113,28 @@ $("detailDialog").showModal();
    tags:$("editTags").value.trim().split(/\s+/).filter(Boolean)
   });
   tx.oncomplete=()=>{$("detailDialog").close();render();};
+  $("tagView").style.display = "block";
+  $("editTags").style.display = "none";
+  $("updateBtn").style.display = "none";
  };
-$("tagView").style.display = "block";
-$("editTags").style.display = "none";
-$("updateBtn").style.display = "none";
 
  $("deleteBtn").onclick=()=>{
-  if(!confirm("削除しますか？")) return;
+  if(!confirm("åé¤ãã¾ããï¼")) return;
   const tx=db.transaction('images','readwrite');
   tx.objectStore('images').delete(item.id);
   tx.oncomplete=()=>{$("detailDialog").close();render();};
+ };
+
+ $("downloadBtn").onclick=()=>{
+  const a=document.createElement('a');
+  a.href=item.data;
+  a.download='image.jpg';
+  a.click();
  };
 
  $("editBtn").onclick = () => {
   $("tagView").style.display = "none";
   $("editTags").style.display = "block";
   $("updateBtn").style.display = "inline-block";
-};
+ };
 }
