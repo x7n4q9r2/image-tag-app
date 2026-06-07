@@ -9,7 +9,7 @@
 <body>
 <header>
 <h2>画像タグ管理</h2>
-<input id="search" placeholder="タグ検索（例: ヒョンジン 金髪）">
+<input id="search" placeholder="タグ検索">
 </header>
 
 <main>
@@ -33,12 +33,10 @@
 <dialog id="detailDialog">
 <img id="detailImg">
 <p id="createdAt"></p>
-<div id="tagView"></div>
-
-<textarea id="editTags" style="display:none;"></textarea>
+<textarea id="editTags"></textarea>
 <div class="actions">
-<button id="editBtn">タグ編集</button>
-<button id="updateBtn" style="display:none;">保存</button>
+<button id="updateBtn">タグ更新</button>
+<button id="downloadBtn">保存</button>
 <button id="deleteBtn">削除</button>
 <button id="closeDetail">閉じる</button>
 </div>
