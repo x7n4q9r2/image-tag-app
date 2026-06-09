@@ -41,7 +41,7 @@ function compressImage(file,max=1800,quality=.85){
 
 $("saveBtn").onclick=async()=>{
  const file=$("imageInput").files[0];
- if(!file)return alert("ç»åãé¸æãã¦ãã ãã");
+ if(!file)return alert("画像を選択してください");
  const data=await compressImage(file);
  const tags=$("tagInput").value.trim().split(/\s+/).filter(Boolean);
 
@@ -67,7 +67,7 @@ async function render(){
   items=items.filter(i=>q.every(t=>i.tags.includes(t)));
  }
 
- $("stats").textContent=`${items.length}ä»¶`;
+ $("stats").textContent=`${items.length}件`;
 
  const gallery=$("gallery");
  gallery.innerHTML='';
@@ -106,7 +106,7 @@ function openDetail(item){
  };
 
  $("deleteBtn").onclick=()=>{
-  if(!confirm("åé¤ãã¾ããï¼")) return;
+  if(!confirm("削除しますか？")) return;
   const tx=db.transaction('images','readwrite');
   tx.objectStore('images').delete(item.id);
   tx.oncomplete=()=>{$("detailDialog").close();render();};
