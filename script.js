@@ -64,8 +64,16 @@ async function render(){
 
  const q=$("search").value.trim().split(/\s+/).filter(Boolean);
  if(q.length){
-  items=items.filter(i=>q.every(t=>i.tags.includes(t)));
- }
+  items = items.filter(item =>
+    q.every(keyword =>
+      item.tags.some(tag =>
+        tag.toLowerCase().includes(
+          keyword.toLowerCase()
+        )
+      )
+    )
+  );
+}
 
  $("stats").textContent=`${items.length}件`;
 
