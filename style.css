@@ -104,17 +104,3 @@ textarea {
   flex: 1;
   min-width: 100px;
 }
-
-.tagHints {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 8px;
-}
-
-.tagChip {
-  background: #eee;
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: .8rem;
-}
