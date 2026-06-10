@@ -83,16 +83,6 @@ if(keyword){
   gallery.appendChild(img);
  });
 
- updateTagHints();
-}
-
-async function updateTagHints(){
- const items=await allItems();
- const tags=[...new Set(items.flatMap(x=>x.tags))].sort();
- $("tagHints").innerHTML=tags.slice(0,30)
-   .map(t=>`<span class="tagChip">${t}</span>`).join('');
-}
-
 function openDetail(item){
  $("detailImg").src=item.data;
  $("createdAt").textContent=new Date(item.createdAt).toLocaleString();
