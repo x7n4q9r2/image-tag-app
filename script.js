@@ -82,6 +82,7 @@ if(keyword){
   img.onclick=()=>openDetail(item);
   gallery.appendChild(img);
  });
+}
 
 function openDetail(item){
  $("detailImg").src=item.data;
