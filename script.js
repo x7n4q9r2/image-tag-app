@@ -62,16 +62,11 @@ async function render(){
  let items=await allItems();
  items.sort((a,b)=>b.createdAt-a.createdAt);
 
- const q=$("search").value.trim().split(/\s+/).filter(Boolean);
- if(q.length){
+ const keyword = $("search").value.trim();
+
+if(keyword){
   items = items.filter(item =>
-    q.every(keyword =>
-      item.tags.some(tag =>
-        tag.toLowerCase().includes(
-          keyword.toLowerCase()
-        )
-      )
-    )
+    item.tags.join(" ").includes(keyword)
   );
 }
 
