@@ -113,3 +113,41 @@ function openDetail(item){
   a.click();
  };
 }
+
+$("exportBtn").onclick = async () => {
+  const items = await allItems();
+
+  const blob = new Blob(
+    [JSON.stringify(items)],
+    { type: "application/json" }
+  );
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `backup-${Date.now()}.json`;
+  a.click();
+};
+
+$("importBtn").onclick = () => {
+  $("importInput").click();
+};
+
+$("importInput").onchange = async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const text = await file.text();
+  const items = JSON.parse(text);
+
+  const tx = db.transaction("images", "readwrite");
+  const store = tx.objectStore("images");
+
+  items.forEach(item => {
+    store.put(item);
+  });
+
+  tx.oncomplete = () => {
+    alert("復元完了");
+    render();
+  };
+};
